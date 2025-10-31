@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a0e60b22d7825643a4056b174a2dafd, type: 3}
+  m_Name: Ship_Normal
+  m_EditorClassIdentifier: 
+  itemName: Crusier Ship
+  itemIcon: {fileID: 21300000, guid: f0630834cdbcfa44e9df53403e44cd58, type: 3}
+  price: 200
+  isPowerup: 0
