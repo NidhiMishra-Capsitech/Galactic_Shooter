@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Crusier Ship
   itemIcon: {fileID: 21300000, guid: f0630834cdbcfa44e9df53403e44cd58, type: 3}
-  price: 0
+  price: 200
   isPowerup: 0
   shipSprite: {fileID: 21300000, guid: f0630834cdbcfa44e9df53403e44cd58, type: 3}
   projectilePrefab: {fileID: 1998049047771681794, guid: 72e5c3b77c2f83343840671496730487, type: 3}

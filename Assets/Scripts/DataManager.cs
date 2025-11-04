@@ -202,7 +202,7 @@ public class DataManager : MonoBehaviour
         for(int i = 0; i < leaderboardLength; i++)
         {
             timedHighScores.Add(PlayerPrefs.GetInt("TimedScore_" + i, 0));
-            survivalHighScores.Add(PlayerPrefs.GetInt("SurvivalScore_" + i, 0));
+            
         }
     }
 }
