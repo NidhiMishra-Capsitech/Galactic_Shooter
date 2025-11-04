@@ -15,7 +15,7 @@ public class DangerZone : MonoBehaviour
                 if (enemy.type == EnemyType.Normal)
                 {
                     // Tell the GameManager to end the game
-                    GameManager.Instance.EndGame("An enemy got past!");
+                    GameManager.Instance.EndGame("Enemy Escaped!");
                 }
             }
             

@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.13, y: 0, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 5}
+  m_LocalScale: {x: 5.5, y: 5.5, z: 5.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: b520897860de45a489bea7656ba71eef, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -182,3 +182,4 @@ MonoBehaviour:
   timeToSubtract: 3
   explosionVFX: {fileID: 100000, guid: 4f4be043c2b5a1a46afe89967b785ab1, type: 3}
   explosionSFX: {fileID: 8300000, guid: bb2e2714f962491428dcb0b38598b251, type: 3}
+  moveDirection: {x: 0, y: -1}

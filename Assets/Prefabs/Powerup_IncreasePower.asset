@@ -14,5 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Increase_Power
   itemIcon: {fileID: 21300000, guid: bad2aa2c7db947349b69824dda8cd5ac, type: 3}
-  price: 600
+  price: 0
   isPowerup: 1
+  shipSprite: {fileID: 0}
+  projectilePrefab: {fileID: 0}
+  fireRate: 0
+  shipScale: {x: 1, y: 1}
+  projectileScale: {x: 1, y: 1}
+  firePointPosition: {x: 0, y: 1}
+  thrusterPosition: {x: 0, y: -1}
+  powerupType: 2

@@ -1,6 +1,6 @@
 using UnityEngine;
-using TMPro; // We need this
-using System.Collections.Generic; // We need this for Lists
+using TMPro;
+using System.Collections.Generic;
 
 public class StoreManager : MonoBehaviour
 {
@@ -8,80 +8,71 @@ public class StoreManager : MonoBehaviour
     public TextMeshProUGUI coinBalanceText;
     public GameObject spaceshipPanel;
     public GameObject powerupPanel;
-    public GameObject notEnoughCoinsPanel; // <-- The new variable
+    public GameObject notEnoughCoinsPanel;
 
     [Header("Store Items")]
-    public List<StoreItemData> allStoreItems; // Our list of all items
-    public GameObject storeItemPrefab; // Our "StoreItemCard" prefab
+    public List<StoreItemData> allStoreItems;
+    public GameObject storeItemPrefab;
+
+    private List<StoreItemCard> activeCards = new List<StoreItemCard>();
 
     void Start()
     {
         UpdateCoinBalance();
         PopulateStore();
-        
-        // Hide the pop-up panel at the start
-        if (notEnoughCoinsPanel != null)
-        {
-            notEnoughCoinsPanel.SetActive(false);
-        }
-        
-        ShowSpaceships(); // Default to showing spaceships
+        if (notEnoughCoinsPanel != null) notEnoughCoinsPanel.SetActive(false);
+        ShowSpaceships(); 
+    }
+    
+    void OnEnable()
+    {
+        UpdateCoinBalance();
+        RefreshAllCards();
     }
 
     public void UpdateCoinBalance()
     {
         if (DataManager.Instance != null)
-        {
             coinBalanceText.text = "Coin Balance: " + DataManager.Instance.totalCoins;
-        }
     }
 
-    // This function builds the store
     void PopulateStore()
     {
-        // Clear any old items
+        activeCards.Clear(); 
         foreach (Transform child in spaceshipPanel.transform) { Destroy(child.gameObject); }
         foreach (Transform child in powerupPanel.transform) { Destroy(child.gameObject); }
 
-        // Loop through all our ScriptableObject items
         foreach (StoreItemData item in allStoreItems)
         {
-            // Create a new card
             GameObject itemCardObject = Instantiate(storeItemPrefab);
-
-            // Sort it into the correct panel
+            
             if (item.isPowerup)
-            {
                 itemCardObject.transform.SetParent(powerupPanel.transform, false);
-            }
             else
-            {
                 itemCardObject.transform.SetParent(spaceshipPanel.transform, false);
-            }
 
-            // Get the card's script and set it up
             StoreItemCard cardScript = itemCardObject.GetComponent<StoreItemCard>();
-            cardScript.Setup(item);
+            cardScript.Setup(item, this);
+            activeCards.Add(cardScript); 
+        }
+    }
+
+    public void RefreshAllCards()
+    {
+        UpdateCoinBalance();
+        foreach (StoreItemCard card in activeCards)
+        {
+            // --- THIS IS THE FIX ---
+            // The old code was buggy. This is simpler and correct.
+            if (card != null && card.currentItemData != null)
+            {
+                card.Setup(card.currentItemData, this); 
+            }
         }
     }
 
     // --- Button Functions ---
-
-    public void ShowSpaceships()
-    {
-        spaceshipPanel.SetActive(true);
-        powerupPanel.SetActive(false);
-    }
-
-    public void ShowPowerups()
-    {
-        spaceshipPanel.SetActive(false);
-        powerupPanel.SetActive(true);
-    }
-
-    // This will be called by our "OK" button on the pop-up
-    public void CloseNotEnoughCoinsPanel()
-    {
-        notEnoughCoinsPanel.SetActive(false);
-    }
+    public void ShowSpaceships() { if (spaceshipPanel != null) spaceshipPanel.SetActive(true); if (powerupPanel != null) powerupPanel.SetActive(false); }
+    public void ShowPowerups() { if (spaceshipPanel != null) spaceshipPanel.SetActive(false); if (powerupPanel != null) powerupPanel.SetActive(true); }
+    public void CloseNotEnoughCoinsPanel() { if (notEnoughCoinsPanel != null) notEnoughCoinsPanel.SetActive(false); }
 }

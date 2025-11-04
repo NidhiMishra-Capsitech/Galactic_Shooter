@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0e60b22d7825643a4056b174a2dafd, type: 3}
   m_Name: Ship_destroyer2
   m_EditorClassIdentifier: 
-  itemName: Destroyer 2
+  itemName: Ship_Destroyer2
   itemIcon: {fileID: 21300000, guid: 859a688a03b6274409bde78f8c964d9f, type: 3}
-  price: 1000
+  price: 0
   isPowerup: 0
+  shipSprite: {fileID: 21300000, guid: 859a688a03b6274409bde78f8c964d9f, type: 3}
+  projectilePrefab: {fileID: 9177452699633313552, guid: 692b66263bae8e44e94e560a83cf7e14, type: 3}
+  fireRate: 0.25
+  shipScale: {x: 0.8, y: 0.8}
+  projectileScale: {x: 2, y: 2}
+  firePointPosition: {x: 0, y: 1}
+  thrusterPosition: {x: 0, y: -1}
+  powerupType: 0

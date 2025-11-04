@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine.UI; // Needed for UI.Image
-using TMPro; // Needed for TextMeshPro
+using UnityEngine.UI;
+using TMPro;
 
 public class StoreItemCard : MonoBehaviour
 {
@@ -8,52 +8,90 @@ public class StoreItemCard : MonoBehaviour
     public Image itemIcon;
     public TextMeshProUGUI priceText;
     public Button getButton;
+    public TextMeshProUGUI getButtonText; 
 
-    private StoreItemData currentItemData;
+    [HideInInspector]
+    public StoreItemData currentItemData; 
+    private StoreManager storeManager; 
 
-    // This function is called by the StoreManager to fill in the card's info
-    public void Setup(StoreItemData data)
+    public void Setup(StoreItemData data, StoreManager manager)
     {
         currentItemData = data;
+        storeManager = manager;
 
-        // Set the UI
         itemIcon.sprite = data.itemIcon;
-        priceText.text = data.price + " Coins";
         
-        // We'll add logic here later to check if it's already "Owned"
-        
-        // Set the button's click listener
-        getButton.onClick.AddListener(OnGetButtonClicked);
-    }
-
-    // This is called when the "Get" button is clicked
-    public void OnGetButtonClicked()
-    {
-        Debug.Log("Trying to buy: " + currentItemData.itemName);
-
-        // Check if the player has enough money
-        if (DataManager.Instance.totalCoins >= currentItemData.price)
+        // --- THIS IS THE FIX ---
+        // We now check against the "Item Name" field, e.g., "Default Ship"
+        if (DataManager.Instance.equippedShipID == currentItemData.itemName)
         {
-            // --- Purchase Logic ---
-            DataManager.Instance.AddCoins(-currentItemData.price); // Subtract coins
-            
-            // Add code here to "unlock" the item
-            // e.g., PlayerPrefs.SetInt("Unlocked_" + currentItemData.itemName, 1);
-
-            Debug.Log("Purchased: " + currentItemData.itemName);
-            
-            // Disable the button after purchase
             getButton.interactable = false;
             priceText.text = "Owned";
-            
-            // We need to update the coin balance text in the store
-            FindObjectOfType<StoreManager>().UpdateCoinBalance();
+            getButtonText.text = "Equipped";
+        }
+        else if (DataManager.Instance.IsShipUnlocked(currentItemData.itemName))
+        {
+            getButton.interactable = true;
+            priceText.text = "Owned";
+            getButtonText.text = "Select";
         }
         else
         {
-            // --- This is the updated part ---
-            // Show the "Not Enough Coins" panel
-            FindObjectOfType<StoreManager>().notEnoughCoinsPanel.SetActive(true);
+            getButton.interactable = true;
+            priceText.text = data.price + " Coins";
+            getButtonText.text = "Buy";
+        }
+        
+        getButton.onClick.RemoveAllListeners();
+        getButton.onClick.AddListener(OnGetButtonClicked);
+    }
+
+   public void OnGetButtonClicked()
+    {
+        // --- NEW LOGIC ---
+        if (currentItemData.isPowerup)
+        {
+            // --- This is the Power-up Buy Logic ---
+            if (DataManager.Instance.totalCoins >= currentItemData.price)
+            {
+                // 1. Subtract coins
+                DataManager.Instance.AddCoins(-currentItemData.price);
+                // 2. Add the power-up
+                DataManager.Instance.AddPowerup(currentItemData.powerupType, 1);
+                // 3. Refresh coin display
+                storeManager.UpdateCoinBalance();
+                // 4. (Optional) Show a "Purchased!" pop-up
+                Debug.Log("Bought 1 " + currentItemData.itemName);
+            }
+            else
+            {
+                // Not enough coins
+                storeManager.notEnoughCoinsPanel.SetActive(true);
+            }
+        }
+        else
+        {
+            // --- This is the Spaceship Buy/Select Logic ---
+            if (DataManager.Instance.IsShipUnlocked(currentItemData.itemName))
+            {
+                DataManager.Instance.EquipShip(currentItemData.itemName);
+            }
+            else
+            {
+                if (DataManager.Instance.totalCoins >= currentItemData.price)
+                {
+                    DataManager.Instance.AddCoins(-currentItemData.price);
+                    DataManager.Instance.UnlockShip(currentItemData.itemName);
+                    DataManager.Instance.EquipShip(currentItemData.itemName);
+                }
+                else
+                {
+                    storeManager.notEnoughCoinsPanel.SetActive(true);
+                }
+            }
+            
+            // Refresh all cards to show new "Equipped" state
+            storeManager.RefreshAllCards();
         }
     }
 }

@@ -10,17 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7a0e60b22d7825643a4056b174a2dafd, type: 3}
-  m_Name: Ship_Basic
+  m_Name: Ship_Default
   m_EditorClassIdentifier: 
-  itemName: Ship_Basic
-  itemIcon: {fileID: 21300000, guid: 8d5f697c999643441bb417d834c597de, type: 3}
+  itemName: Default Ship
+  itemIcon: {fileID: 21300000, guid: cd82491a1562f894bb043cae1a9a8392, type: 3}
   price: 0
   isPowerup: 0
-  shipSprite: {fileID: 21300000, guid: 8d5f697c999643441bb417d834c597de, type: 3}
+  shipSprite: {fileID: 21300000, guid: cd82491a1562f894bb043cae1a9a8392, type: 3}
   projectilePrefab: {fileID: 1708550948809917084, guid: bff03ecc351f5b14c9727f5d13b0dae8, type: 3}
   fireRate: 0.5
-  shipScale: {x: 3, y: 3}
+  shipScale: {x: 0.05, y: 0.05}
   projectileScale: {x: 2, y: 2}
-  firePointPosition: {x: 0, y: 1}
-  thrusterPosition: {x: 0, y: -0.2}
-  powerupType: 0
