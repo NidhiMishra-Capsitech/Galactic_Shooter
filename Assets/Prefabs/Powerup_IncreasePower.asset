@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Increase_Power
   itemIcon: {fileID: 21300000, guid: bad2aa2c7db947349b69824dda8cd5ac, type: 3}
-  price: 600
+  price: 60
   isPowerup: 1
   shipSprite: {fileID: 0}
   projectilePrefab: {fileID: 0}

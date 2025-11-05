@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Ship_Basic
   m_EditorClassIdentifier: 
   itemName: Ship_Basic
-  itemIcon: {fileID: 21300000, guid: 8d5f697c999643441bb417d834c597de, type: 3}
+  itemIcon: {fileID: 21300000, guid: a93c36da6f7182e4096ca2c951efbf42, type: 3}
   price: 0
   isPowerup: 0
-  shipSprite: {fileID: 21300000, guid: 8d5f697c999643441bb417d834c597de, type: 3}
+  shipSprite: {fileID: 21300000, guid: a93c36da6f7182e4096ca2c951efbf42, type: 3}
   projectilePrefab: {fileID: 1708550948809917084, guid: bff03ecc351f5b14c9727f5d13b0dae8, type: 3}
-  fireRate: 0.5
+  fireRate: 0.4
   shipScale: {x: 3, y: 3}
   projectileScale: {x: 2, y: 2}
-  firePointPosition: {x: 0, y: 1}
-  thrusterPosition: {x: 0, y: -0.2}
+  firePointPosition: {x: 0, y: 0}
+  thrusterPosition: {x: 0, y: -0.1}
   powerupType: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Ship_Destroyer2
   itemIcon: {fileID: 21300000, guid: 859a688a03b6274409bde78f8c964d9f, type: 3}
-  price: 1000
+  price: 700
   isPowerup: 0
   shipSprite: {fileID: 21300000, guid: 859a688a03b6274409bde78f8c964d9f, type: 3}
   projectilePrefab: {fileID: 9177452699633313552, guid: 692b66263bae8e44e94e560a83cf7e14, type: 3}
